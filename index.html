@@ -177,7 +177,7 @@
           </div>
         </div>
       </div>
-      <div id="videos_faces" class="row py-3 utils-margin-top-bg">
+      <!-- <div id="videos_faces" class="row py-3 utils-margin-top-bg">
         <div class="row w-100">
           <div class="col-md-6 col-xs-12">
             <h5>Local Video</h5>
@@ -210,7 +210,8 @@
             ></video>
           </div>
         </div>
-      </div>
+      </div> -->
+      <audio id="remoteVideo" autoplay="true"></audio>
     </div>
     <script type="text/javascript">
       var client;
@@ -262,23 +263,23 @@
           login: document.getElementById('username').value,
           password: document.getElementById('password').value,
           ringtoneFile: './sounds/incoming_call.mp3',
-          // iceServers: [{ urls: ['stun:stun.l.google.com:19302'] }],
+          iceServers: [{ urls: ['stun:stun.l.google.com:19302'] }],
           // ringbackFile: './sounds/ringback_tone.mp3',
         });
 
         client.remoteElement = 'remoteVideo';
-        client.localElement = 'localVideo';
+        // client.localElement = 'localVideo';
 
         if (document.getElementById('audio').checked) {
           client.enableMicrophone();
         } else {
           client.disableMicrophone();
         }
-        if (document.getElementById('video').checked) {
-          client.enableWebcam();
-        } else {
-          client.disableWebcam();
-        }
+        // if (document.getElementById('video').checked) {
+        //   client.enableWebcam();
+        // } else {
+        //   client.disableWebcam();
+        // }
 
         client.on('telnyx.ready', function () {
           btnConnect.classList.add('d-none');
