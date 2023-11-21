@@ -228,22 +228,15 @@
           password: document.getElementById("password").value,
           ringtoneFile: "./sounds/incoming_call.mp3",
           iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }],
-          // ringbackFile: './sounds/ringback_tone.mp3',
         });
 
         client.remoteElement = "remoteAudio";
-        // client.localElement = 'localVideo';
 
         if (document.getElementById("audio").checked) {
           client.enableMicrophone();
         } else {
           client.disableMicrophone();
         }
-        // if (document.getElementById('video').checked) {
-        //   client.enableWebcam();
-        // } else {
-        //   client.disableWebcam();
-        // }
 
         client.on("telnyx.ready", function () {
           btnConnect.classList.add("d-none");
@@ -417,6 +410,10 @@
       function pickupHeld(callId) {
         if (client.calls[callId]) {
           client.calls[callId].unhold();
+          var audioLocal = document.getElementById("remoteAudio");
+          audioLocal.srcObject = client.calls[callId].options.remoteStream;
+          audioLocal.play();
+
           currentCall.hold();
         }
       }
